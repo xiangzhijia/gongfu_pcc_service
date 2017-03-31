@@ -1,0 +1,83 @@
+#测试代码
+yhqb: 
+   secret: ${random.value}
+   url: www.yhqb.com
+   desc: ${yhqb.url} 1201 is to
+
+#时间格式化
+spring:
+   profiles:
+     active: test
+   datasource: 
+     type: com.zaxxer.hikari.HikariDataSource
+     url: jdbc:mysql://localhost:3306/xzj
+     username: root
+     password: admin
+   redis:
+      # Redis数据库索引（默认为0）
+      database: 0
+      # Redis服务器地址
+      host: localhost
+      # Redis服务器连接端口
+      port: 6379
+      # Redis服务器连接密码（默认为空）
+      password: 123456
+      pool:
+         # 连接池最大连接数（使用负值表示没有限制）
+         max-active: 8
+         # 连接池最大阻塞等待时间（使用负值表示没有限制）
+         max-wait: -1
+         # 连接池中的最大空闲连接
+         max-idle: 8
+         # 连接池中的最小空闲连接
+         min-idle: 0
+      # 连接超时时间（毫秒）
+      timeout: 0
+      #服务名称
+   application:
+      name: pcc-service
+
+eureka:
+  client:
+   serviceUrl:
+    defaultZone: http://localhost:8088/eureka/
+
+mybatis:
+    type-aliases-package: com.gongfu.model
+    mapper-locations: classpath:mapper/*.xml
+    config-location: classpath:mybatis-config.xml
+
+mapper:
+    mappers:
+        - com.gongfu.base.PccBaseMapper
+    not-empty: true
+    identity: MYSQL
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+#dev环境     
+---
+spring:
+     profiles: dev
+server:
+     port: 8080     
+     
+#test环境
+---
+spring:
+     profiles: test
+server:
+     port: 8082
+
+#生产环境
+---
+spring:
+     profiles: pro
+server:
+     port: 8082      
+     
+      
