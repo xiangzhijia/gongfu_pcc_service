@@ -1,5 +1,6 @@
 package com.gongfu.web;
 
+import com.gongfu.web.client.ClientCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -18,11 +19,11 @@ public class UserController {
     @Autowired
     private DiscoveryClient client;
 
-    @RequestMapping(value = "/api/user/test", method = RequestMethod.GET)
+    @RequestMapping(value = ClientCode.RPC_PCC_URL+"/test", method = RequestMethod.GET)
     public String test(Integer a, String b) {
         log.info(a + "=======>" + b);
         ServiceInstance instance = client.getLocalServiceInstance();
         log.info("/add, host:" + instance.getHost() + ", service_id:" + instance.getServiceId());
-        return "1235";
+        return a+"-"+b;
     }
 }
