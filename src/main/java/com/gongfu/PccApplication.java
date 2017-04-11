@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@MapperScan(basePackages = "com.gongfu.mapper.*", markerInterface = PccBaseMapper.class)
 @EnableDiscoveryClient
+@MapperScan(basePackages = "com.gongfu.mapper.*", markerInterface = PccBaseMapper.class)
 public class PccApplication {
 
     public static void main(String[] args) {
